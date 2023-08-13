@@ -6,9 +6,9 @@ const ResidentCard = ({ residentUrl }) => {
     const [residentInfo, setResidentInfo] = useState(null)
 
     const residentStatus = {
-        Alive: "bg-green-500",
-        Dead: "bg-red-500",
-        unknown: "bg-slate-500"
+        Alive: "bg-green-apple",
+        Dead: "bg-red",
+        unknown: "bg-gray-blue"
     }
 
     useEffect(() => {
@@ -19,10 +19,10 @@ const ResidentCard = ({ residentUrl }) => {
     }, [])
 
     return (
-        <article className="">
-            <header className="">
-                <img className="" src={residentInfo?.image} alt="" />
-                <div className="">
+        <article className="bg-purple w-[260px] h- grid grid-rows-[auto_auto] place-items-center">
+            <header className="relative">
+                <img className="h-[150px] aspect-square border-solid border-[8px] border-red-wine rounded-full" src={residentInfo?.image} alt="" />
+                <div className="bg-dark-gray flex gap-2 justify-center items-center w-[90px] p-[2px] rounded-full text-white text-sm absolute bottom-6 right-1/2 translate-x-1/2">
                     <div className={`h-[10px] aspect-square rounded-full ${residentStatus[residentInfo?.status]}`}></div>
                     {residentInfo?.status}
                 </div>

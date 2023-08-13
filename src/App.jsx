@@ -6,6 +6,9 @@ import LocationForm from "./components/LocationForm"
 import LocationInfo from "./components/LocationInfo"
 import ResidentList from "./components/ResidentList"
 import ModalEmptySearch from "./components/ModalEmptySearch"
+import FirstScreen from "./components/FirstScreen"
+
+const EMPTY_DIMENSION_SEARCH = 12
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState(null)
@@ -14,7 +17,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const newLocation = e.target.newLocation.value
-    newLocation === "" ? setEmptySearch(true) : fetchDimension(newLocation)
+    newLocation === "" ? setEmptySearch(true) & fetchDimension(EMPTY_DIMENSION_SEARCH) : fetchDimension(newLocation)
   }
 
   const handleCloseModal = () => {
@@ -36,17 +39,19 @@ function App() {
   }, [])
 
   return (
-    <main className="min-h-screen text-black bg-[url(/images/bg-rm.jpg)] bg-cover p-4 font-Nunito grid grid-rows-[repeat(4,auto)] gap-8 place-items-center relative">
+    <main className="min-h-screen text-black bg-[url(/images/bg-rm.jpg)] bg-cover bg-center p-4 font-Nunito grid grid-rows-[repeat(4,auto)] gap-8 place-items-center relative overflow-hidden">
       <section>
         <img className="w-[260px] pt-8 min-[500px]:w-[350px]" src="/images/logo-ram.png" alt="" />
       </section>
       {
-        emptySearch && <ModalEmptySearch handleCloseModal={handleCloseModal} />
+        <ModalEmptySearch handleCloseModal={handleCloseModal} emptySearch={emptySearch} />
       }
       <LocationForm handleSubmit={handleSubmit} />
       <LocationInfo currentLocation={currentLocation} />
       <ResidentList residents={currentLocation?.residents ?? []} currentLocation={currentLocation} />
     </main>
+
+    // < FirstScreen />
 
   )
 }

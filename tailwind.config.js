@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {},
     fontFamily: {
-      'Nunito': ['Nunito', ', sans-serif']
+      'Nunito': ['Nunito', 'sans-serif']
     },
     colors: {
       'red-wine': '#893446',

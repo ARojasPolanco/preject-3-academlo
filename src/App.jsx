@@ -5,15 +5,20 @@ import axios from "axios"
 import LocationForm from "./components/LocationForm"
 import LocationInfo from "./components/LocationInfo"
 import ResidentList from "./components/ResidentList"
+import ModalEmptySearch from "./components/ModalEmptySearch"
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState(null)
+  const [emptySearch, setEmptySearch] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const newLocation = e.target.newLocation.value
+    newLocation === "" ? setEmptySearch(true) : fetchDimension(newLocation)
+  }
 
-    fetchDimension(newLocation)
+  const handleCloseModal = () => {
+    setEmptySearch(false)
   }
 
   const fetchDimension = (idLocation) => {
@@ -31,14 +36,18 @@ function App() {
   }, [])
 
   return (
-    <main className="min-h-screen text-black bg-[url(/images/bg-rm.jpg)] bg-cover p-4 font-Nunito grid grid-rows-[repeat(4,auto)] gap-8 place-items-center">
+    <main className="min-h-screen text-black bg-[url(/images/bg-rm.jpg)] bg-cover p-4 font-Nunito grid grid-rows-[repeat(4,auto)] gap-8 place-items-center relative">
       <section>
-        <img className="w-[260px] pt-8" src="/images/logo-ram.png" alt="" />
+        <img className="w-[260px] pt-8 min-[500px]:w-[350px]" src="/images/logo-ram.png" alt="" />
       </section>
+      {
+        emptySearch && <ModalEmptySearch handleCloseModal={handleCloseModal} />
+      }
       <LocationForm handleSubmit={handleSubmit} />
       <LocationInfo currentLocation={currentLocation} />
       <ResidentList residents={currentLocation?.residents ?? []} currentLocation={currentLocation} />
     </main>
+
   )
 }
 

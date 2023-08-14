@@ -18,7 +18,10 @@ export const useCatchErrors = (bool) => {
     }
 
     const loaderScreen = () => {
-        setIsLoading(bool)
+        setTimeout(() => {
+            setIsLoading(bool)
+        }, 2000);
+
     }
 
     return {

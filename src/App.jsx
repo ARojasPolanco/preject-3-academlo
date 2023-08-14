@@ -28,10 +28,7 @@ function App() {
       .get(url)
       .then(({ data }) => {
         setCurrentLocation(data)
-        setTimeout(() => {
-          loaderScreen()
-        }, 2000);
-
+        loaderScreen()
       })
       .catch((err) => {
         console.log(err);
@@ -39,13 +36,20 @@ function App() {
       });
   }
 
+  const staticDimension = () => {
+    fetchDimension(EMPTY_DIMENSION_SEARCH)
+  }
+
   useEffect(() => {
-    const randomDimension = getRandomDimension(126)
-    fetchDimension(randomDimension)
+    staticDimension()
+    setTimeout(() => {
+      const randomDimension = getRandomDimension(126)
+      fetchDimension(randomDimension)
+    }, 2000);
   }, [])
 
   return (
-    <main className="min-h-screen text-black bg-[url(/images/bg-rm.jpg)] bg-cover bg-center p-4 font-Nunito grid grid-rows-[repeat(4,auto)] gap-8 place-items-center relative overflow-hidden">
+    <main className="min-h-screen text-black bg-[url(/images/bg-rm.jpg)] bg-bottom px-4 font-Nunito grid grid-rows-[repeat(4,auto)] gap-8 place-items-center relative overflow-hidden">
       <section>
         <img className="w-[260px] pt-8 min-[500px]:w-[350px]" src="/images/logo-ram.png" alt="" />
       </section>

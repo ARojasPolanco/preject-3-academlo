@@ -24,19 +24,19 @@ function App() {
   const fetchDimension = (idLocation) => {
     const url = `https://rickandmortyapi.com/api/location/${idLocation}`
 
-    setTimeout(() => {
-      axios
-        .get(url)
-        .then(({ data }) => {
-          setCurrentLocation(data)
+    axios
+      .get(url)
+      .then(({ data }) => {
+        setCurrentLocation(data)
+        setTimeout(() => {
           loaderScreen()
-        })
-        .catch((err) => {
-          console.log(err);
-          error404();
-        });
+        }, 2000);
 
-    }, 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+        error404();
+      });
   }
 
   useEffect(() => {

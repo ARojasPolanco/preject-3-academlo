@@ -21,6 +21,11 @@ function App() {
     newLocation === "" ? emptyError(true) & fetchDimension(EMPTY_DIMENSION_SEARCH) : fetchDimension(newLocation)
   }
 
+  const btnGoToUp = () => {
+    const buttonUp = document.querySelector('.bx-chevron-up-circle')
+    buttonUp.addEventListener('click', () => window.scrollTo(0, 0))
+  }
+
   const fetchDimension = (idLocation) => {
     const url = `https://rickandmortyapi.com/api/location/${idLocation}`
 
@@ -75,6 +80,10 @@ function App() {
       <LocationForm handleSubmit={handleSubmit} />
       <LocationInfo currentLocation={currentLocation} />
       <ResidentList residents={currentLocation?.residents ?? []} currentLocation={currentLocation} />
+
+      <div className="text-red-wine bg-lila rounded-full h-10 aspect-square flex justify-center items-center border-4 border-red-wine fixed bottom-4 right-4 cursor-pointer" onClick={btnGoToUp}>
+        <i className='bx bx-chevron-up-circle text-3xl'></i>
+      </div>
     </main>
   )
 }
